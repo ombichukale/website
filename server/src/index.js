@@ -12,7 +12,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Backend server is running");
 });
-
+app.get("/api/test",(req,res)=>{
+  res.json({
+    message:"Frontend and Backend Connected Successfully"
+  })
+})
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

@@ -1,15 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Home = () => {
+
+  const [message, setMessage] = useState("Loading...");
+
+  useEffect(() => {
+
+    const fetchBackend = async () => {
+      try {
+
+        const response = await axios.get(
+          "http://localhost:5000/api/test"
+        );
+
+        setMessage(response.data.message);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchBackend();
+
+  }, []);
+
   return (
     <div className="text-white">
       <h1 className="text-5xl font-bold">
-        Build AI Websites Faster
+        {message}
       </h1>
-
-      <p className="text-gray-400 mt-4 text-lg">
-        Generate modern websites using AI.
-      </p>
     </div>
   )
 }
